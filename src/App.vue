@@ -5,7 +5,7 @@
     </header>
     <section id="add" class="container">
       <input v-model="input" />
-      <button :disabled="checkLenght()" @click="addItem()">Add to list</button>
+      <button :disabled="checkLenght" @click="addItem()">Add to list</button>
     </section>
 
     <section id="active" class="container">
@@ -49,11 +49,6 @@ export default {
     deleteItem(item) {
       item.is_deleted = true;
     },
-    checkLenght() {
-      let check;
-      this.input.length > 0 ? (check = false) : (check = true);
-      return check;
-    },
   },
   computed: {
     validItems() {
@@ -61,6 +56,9 @@ export default {
     },
     deletedItems() {
       return this.list.filter((item) => item.is_deleted);
+    },
+    checkLenght() {
+      return !this.input.trim();
     },
   },
 };
